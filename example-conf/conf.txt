@@ -1,0 +1,59 @@
+# Register		Value	Address		Bytes
+#
+### Register settins in MtxCoin modules ###
+# You can set the delay and width values for DWGenerator within the following ranges
+# -Delay: 0-31
+# -Width: 1-32
+#  Note that 1 corresponds to 2ns
+Tele::Dwg::Delay	1	0x00000000	8
+Tele::Dwg::Width	10	0x00000000	8
+AC::Dwg::Delay		1	0x00100000	8
+AC::Dwg::Width		20	0x00100000	8
+Pad::Dwg::Delay		1	0x00200000	8
+Pad::Dwg::Width		20	0x00200000	8
+Trg::Dwg::Delay		1	0x00300000	8
+Trg::Dwg::Width		1	0x00300000	8
+OrAc::Dwg::Delay	1	0x00400000	8
+OrAc::Dwg::Width	20	0x00400000	8
+
+### Force coincidence bits ###
+# -1st-bit: telescope1, 2nd-bit telescope2, ...
+# Eg, if you want remove telescope3 from the coincidence, set 4.
+Trg::Coin::Force	0	0x00500000	1
+
+### Trg and OrAc requirements ###
+# If you want to remove Trg (OrAc) from coincidence, set 1 to each bit.
+# -1st-bit: Trg
+# -2nd-bit: OrAc
+Trg::Ctrl::Remove	0	0x00600000	1
+
+### NIM IO setting ###
+# 0: Not in use
+# 1: Dwg out telescope1
+# 2: Dwg out telescope2
+# 3: Dwg out telescope3
+# 4: Or AC
+# 5: Coin pad
+# 6: Dwg out Trg
+# 7: Dwg out OrAc
+# 8: CoinPad & Trg
+# 9: OrAc & Trg
+# 10: OrAc & CoinPad
+# 11: CoinPad & Trg & OrAc
+# 12: Not in use
+# 13: Not in use
+# 14: Not in use
+# 15: Not in use
+IOM::NimOut::1		1	0x11000000	1
+IOM::NimOut::2		0	0x12000000	1
+IOM::NimOut::3		0	0x13000000	1
+
+### Spill Gate Generator setting ###
+# Spill gate is output from NIMOUT4
+# You can set the delay and width values for SpillGateGenerator within the following ranges
+# -Delay 0x100 - 0xffffffff
+# -Width 0x100 - 0xffffffff
+# Note that 1 corresponds to 1us
+SGG::GG::Delay		300000	0x20000000	4
+SGG::GG::Width		2000000	0x20100000	4
+
